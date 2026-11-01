@@ -1,0 +1,11 @@
+flowchart TD
+    A[Enter origin and destination] --> B[Search ordered train stops]
+    B --> C[Choose dated run]
+    C --> D[Select seat]
+    D --> E[Begin transaction and lock seat row]
+    E --> F{Confirmed booking exists?}
+    F -- Yes --> G[Return seat unavailable]
+    F -- No --> H[Insert CONFIRMED booking]
+    H --> I[Commit and show PNR]
+    I --> J[Later view or cancel booking]
+    J --> K[Cancellation changes status; history remains]

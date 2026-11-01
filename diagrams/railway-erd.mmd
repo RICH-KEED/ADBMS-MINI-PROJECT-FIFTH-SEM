@@ -1,0 +1,49 @@
+erDiagram
+    PASSENGER ||--o{ BOOKING : places
+    TRAIN ||--o{ TRAIN_STOP : follows
+    STATION ||--o{ TRAIN_STOP : appears_at
+    TRAIN ||--o{ TRAIN_RUN : operates
+    TRAIN_RUN ||--o{ SEAT : has
+    SEAT ||--o{ BOOKING : reserved_in_history
+    PASSENGER {
+        bigint passenger_id PK
+        varchar full_name
+        varchar email UK
+    }
+    TRAIN {
+        bigint train_id PK
+        varchar train_number UK
+        varchar train_name
+    }
+    STATION {
+        bigint station_id PK
+        char station_code UK
+        varchar station_name
+    }
+    TRAIN_STOP {
+        bigint train_id PK, FK
+        smallint stop_sequence PK
+        bigint station_id FK
+        time arrival_time
+        time departure_time
+    }
+    TRAIN_RUN {
+        bigint run_id PK
+        bigint train_id FK
+        date service_date
+    }
+    SEAT {
+        bigint seat_id PK
+        bigint run_id FK
+        varchar coach_code
+        varchar seat_number
+    }
+    BOOKING {
+        bigint booking_id PK
+        varchar pnr UK
+        bigint passenger_id FK
+        bigint seat_id FK
+        numeric fare_inr
+        varchar status
+        timestamptz booked_at
+    }
